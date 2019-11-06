@@ -19,7 +19,7 @@ class ServerlessStepFunctionsLocal {
     }
 
     if (!this.config.region) {
-      this.config.region = 'localhost';
+      throw new Error('Step Functions Local: missing region');
     }
 
     if (!this.config.lambdaEndpoint) {
@@ -54,7 +54,8 @@ class ServerlessStepFunctionsLocal {
   async startStepFunctions() {
     this.stepfunctionsServer.start({
       account: this.config.accountId.toString(),
-      lambdaEndpoint: this.config.lambdaEndpoint
+      lambdaEndpoint: this.config.lambdaEndpoint,
+      region: this.config.region
     }).on('data', data => {
       console.log(chalk.blue('[Serverless Step Functions Local]'), data.toString());
     });
