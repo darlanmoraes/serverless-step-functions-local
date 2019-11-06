@@ -30,7 +30,10 @@ class ServerlessStepFunctionsLocal {
       this.config.path = './.step-functions-local';
     }
 
-    console.log(chalk.blue('[Serverless Step Functions Local]'), JSON.stringify(this.config, null, 2));
+    console.log(this.config);
+    console.log(this.service.custom.stepFunctionsLocal);
+    console.log(JSON.stringify(this.service.custom.stepFunctionsLocal, null, 2));
+    console.log(JSON.stringify(this.config, null, 2));
     this.stepfunctionsServer = new StepFunctionsLocal(this.config);
 
     this.stepfunctionsAPI = new AWS.StepFunctions({endpoint: 'http://localhost:8083', region: this.config.region});
